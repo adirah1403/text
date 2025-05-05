@@ -1,0 +1,42 @@
+public class StudentManager {
+
+    public static void createStudents() {
+        List<Student__c> students = new List<Student__c>();
+
+        students.add(new Student__c(Name='Student 1', Roll_Number__c='R101', Email__c='student1@example.com', Age__c=19, Grade__c='Grade 1'));
+        students.add(new Student__c(Name='Student 2', Roll_Number__c='R102', Email__c='student2@example.com', Age__c=20, Grade__c='Grade 2'));
+        students.add(new Student__c(Name='Student 3', Roll_Number__c='R103', Email__c='student3@example.com', Age__c=21, Grade__c='Grade 3'));
+        students.add(new Student__c(Name='Student 4', Roll_Number__c='R104', Email__c='student4@example.com', Age__c=22, Grade__c='Grade 4'));
+        students.add(new Student__c(Name='Student 5', Roll_Number__c='R105', Email__c='student5@example.com', Age__c=23, Grade__c='Grade 5'));
+        students.add(new Student__c(Name='Student 6', Roll_Number__c='R106', Email__c='student6@example.com', Age__c=24, Grade__c='Grade 1'));
+        students.add(new Student__c(Name='Student 7', Roll_Number__c='R107', Email__c='student7@example.com', Age__c=25, Grade__c='Grade 2'));
+        students.add(new Student__c(Name='Student 8', Roll_Number__c='R108', Email__c='student8@example.com', Age__c=26, Grade__c='Grade 3'));
+        students.add(new Student__c(Name='Student 9', Roll_Number__c='R109', Email__c='student9@example.com', Age__c=27, Grade__c='Grade 4'));
+        students.add(new Student__c(Name='Student 10', Roll_Number__c='R110', Email__c='student10@example.com', Age__c=28, Grade__c='Grade 5'));
+
+        insert students;
+        System.debug('Students inserted successfully.');
+    }
+
+    public static void readStudents() {
+        List<Student__c> students = [SELECT Name, Roll_Number__c, Email__c, Age__c, Grade__c FROM Student__c];
+        for (Student__c s : students) {
+            System.debug(s);
+        }
+    }
+
+    public static void updateStudents() {
+        List<Student__c> students = [SELECT Id, Name FROM Student__c LIMIT 5];
+        for (Student__c s : students) {
+            s.Name = s.Name + ' - Updated';
+        }
+        update students;
+        System.debug('Students updated.');
+    }
+
+    public static void deleteStudents() {
+        List<Student__c> students = [SELECT Id FROM Student__c LIMIT 3];
+        delete students;
+        System.debug('Students deleted.');
+    }
+}
